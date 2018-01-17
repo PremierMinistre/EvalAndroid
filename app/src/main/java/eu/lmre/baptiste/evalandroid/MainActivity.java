@@ -1,46 +1,21 @@
 package eu.lmre.baptiste.evalandroid;
 
 import android.content.Intent;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-
-import retrofit2.Retrofit;
-//import retrofit2.http.GET;
-//import android.os.AsyncTask;
-//import android.os.Handler.Callback;
-//import retrofit2.http.Path;
 import retrofit2.Call;
-import com.google.gson.Gson;
-
-import java.util.Collection;
 import java.util.List;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Response;
-//import android.os.AsyncTask;
-//import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Type;//Pour debug
-//import java.util.List;
-
 import retrofit2.Callback;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 /***
  *
@@ -57,13 +32,19 @@ public class MainActivity extends AppCompatActivity {
     public final static String PERSO_CHOISI = "eu.lmre.baptiste.evalandroid.PERSO_CHOISI";
     public String nextPage;
     int numeroDePage = 1;
+    int compteurPeople = 0;
+    ArrayAdapter<String> adapterPersos;
+    View footerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listDesPersos = findViewById(R.id.listDesPersos);
-        texte = findViewById(R.id.noDeviceFound);
+        footerView =  ((LayoutInflater)this.getSystemService(this.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_layout, null, false);
+        listDesPersos.addFooterView(footerView);
+        listDesPersos.setClickable(false);
+        Toast.makeText(MainActivity.this, R.string.loading, Toast.LENGTH_LONG).show();
         chargerPeople();
     }
     public void chargerPeople (){
@@ -82,9 +63,11 @@ public class MainActivity extends AppCompatActivity {
                             nextPage = response.body().getNextPage();
                             if(nextPage!=null){
                                 numeroDePage++;
+                                afficherPeople();
                                 chargerPeople();
                             }else{
                                 afficherPeople();
+                                listDesPersos.removeFooterView(footerView);
                             }
                         }
                     }
@@ -104,18 +87,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void afficherPeople() {
-
-            findViewById(R.id.loader).setVisibility(View.GONE);
-            texte.setVisibility(View.GONE);
-
-            ArrayAdapter<String> adapterPersos = new ArrayAdapter<String>(MainActivity.this,
-                    android.R.layout.simple_list_item_1);
-            listDesPersos.setAdapter(adapterPersos);
-            for(int i=0; i<peoples.size();i++){
-                adapterPersos.add(peoples.get(i).name);
+            //findViewById(R.id.loader).setVisibility(View.GONE);
+            //texte.setVisibility(View.GONE);
+            if(!listDesPersos.isClickable()) {
+                adapterPersos = new ArrayAdapter<String>(MainActivity.this,
+                        android.R.layout.simple_list_item_1);
+                listDesPersos.setClickable(true);
+                listDesPersos.setOnItemClickListener(onPeopleClick);
+                listDesPersos.setAdapter(adapterPersos);
             }
-            listDesPersos.setClickable(true);
-            listDesPersos.setOnItemClickListener(onPeopleClick);
+            while(compteurPeople<peoples.size()){
+                adapterPersos.add(peoples.get(compteurPeople).name);
+                compteurPeople++;
+            }
+
     }
 
     /**

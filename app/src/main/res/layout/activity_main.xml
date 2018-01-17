@@ -5,42 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="eu.lmre.baptiste.evalandroid.MainActivity">
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/mainActivityLLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/noDeviceFound"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="16dp"
-                    android:text="@string/loading"
-                    android:visibility="visible"
-                    tools:visibility="visible"/>
-                <ProgressBar
-                    android:id="@+id/loader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp"
-                    android:visibility="visible"
-                    tools:visibility="visible"/>
-
-            </LinearLayout>
-        </ScrollView>
         <ListView
             android:id="@+id/listDesPersos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

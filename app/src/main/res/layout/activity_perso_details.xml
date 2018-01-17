@@ -6,24 +6,40 @@
     android:layout_height="match_parent"
     tools:context="eu.lmre.baptiste.evalandroid.MainActivity">
     <RelativeLayout
+        android:id="@+id/infoPersoRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ScrollView
+            android:id="@+id/infoPersoScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
+                android:id="@+id/infoPersoLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
                 <TextView
                     android:id="@+id/infoPerso"
-                    android:layout_width="match_parent"
+                    style="@style/TextAttributs"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:padding="16dp"
                     android:text="@string/loading"
                     android:visibility="visible"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/infoPersoRight"
+                    style="@style/TextInfos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:padding="16dp"
+                    android:text="@string/loading"
+                    android:visibility="visible"
+                    tools:visibility="visible"
+                    android:layout_weight="1"/>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

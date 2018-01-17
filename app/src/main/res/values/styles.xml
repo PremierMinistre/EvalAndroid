@@ -6,6 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
+    </style>
+    <style name="TextAttributs">
+        <item name="android:textColor">@color/noir</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextInfos">
+        <item name="android:textColor">@color/gris</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
 </resources>
