@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SWAPIonAndroid</string>
+    <string name="nothingToDisplay">Rien à afficher</string>
+    <string name="test">Test</string>
+    <string name="status_error">Erreur</string>
+    <string name="loading">Chargement en cours</string>
+</resources>
